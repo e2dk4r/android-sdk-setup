@@ -46,3 +46,5 @@ echo 'installed build-tools 30.0.0'
 #unzip -q emulator-linux_x64-9189900.zip
 #mv $ANDROID_HOME/emulator 
 #echo 'installed emulator'
+
+echo 'NOTE: do not forget to add ANDROID_HOME=/tmp/android to your environment'
