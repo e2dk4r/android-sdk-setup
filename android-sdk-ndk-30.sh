@@ -2,6 +2,7 @@ echo jdk? clang?
 
 which curl >/dev/null || (echo curl not installed && exit 1)
 which unzip >/dev/null || (echo unzip not installed && exit 1)
+which sha256sum >/dev/null || (echo sha256sum not installed && exit 1)
 
 # package    | linux      | windows      | mac
 # --------------------------------------------------------------------
