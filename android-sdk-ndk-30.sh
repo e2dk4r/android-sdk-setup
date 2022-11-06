@@ -61,3 +61,4 @@ echo 'installed build-tools 30.0.0'
 # POST INSTALL
 ################################################################
 echo 'NOTE: do not forget to add ANDROID_HOME=/tmp/android to your environment'
+which java >/dev/null || echo 'NOTE: java not installed. you probably need jdk'
