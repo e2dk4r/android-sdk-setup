@@ -1,7 +1,7 @@
 #!/bin/sh
 set -o errexit # exit on any command failure
 
-INSTALL_EMULATOR=1
+INSTALL_EMULATOR=0
 INSTALL_JAVA=1
 
 # 3 means only error messages
@@ -234,15 +234,18 @@ fi
 
 if [ $INSTALL_JAVA -ne 0 ]; then
 
-  HASH_B3='1aaa5acd8ebdb49da475ddaf583c8b9e75411432c07039b38481e2df9514583b  openjdk-21.0.1_linux-x64_bin.tar.gz'
-  HASH_B2='c231de5d5c89acd5514915acb88dbd738377bd32a3d02a70e4ae6ce403fa085c2baf3fbf921d4f8d6eb051e3f565afda9166144990390347b95f3505874dbd3a  openjdk-21.0.1_linux-x64_bin.tar.gz'
-  HASH_SHA256='7e80146b2c3f719bf7f56992eb268ad466f8854d5d6ae11805784608e458343f  openjdk-21.0.1_linux-x64_bin.tar.gz'
+  # see https://whichjdk.com/
+  # Adoptium Eclipse Temurin 21
 
-  test -f openjdk-21.0.1_linux-x64_bin.tar.gz || download openjdk-21.0.1_linux-x64_bin.tar.gz 'https://download.java.net/java/GA/jdk21.0.1/415e3f918a1f4062a0074a2794853d0d/12/GPL/openjdk-21.0.1_linux-x64_bin.tar.gz'
+  HASH_B3='94b232b1702e07d5061f217595445ef6c1c1bc26830e8c2f8db165e741589d5c  OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz'
+  HASH_B2='ed139c216a82ed9c258bc3b48fccee184f8facd4f53f607ed6db79b7fe01193a41d3097bece31b5bf53c6964c96ac5e4f473f27fbb57a3e24b58149f3bd3db3c  OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz'
+  HASH_SHA256='3c654d98404c073b8a7e66bffb27f4ae3e7ede47d13284c132d40a83144bfd8c  OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz'
+
+  test -f OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz || download OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5%2B11/OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz'
   verify "$HASH_B3" "$HASH_B2" "$HASH_SHA256" || (fail 'file corrupt')
-  extract tar openjdk-21.0.1_linux-x64_bin.tar.gz
-  mv jdk-21.0.1 $ANDROID_HOME/jdk-21.0.1
-  ln -sf $ANDROID_HOME/jdk-21.0.1 $ANDROID_HOME/jdk
+  extract tar OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+  mv jdk-21.0.5+11 $ANDROID_HOME/jdk-21.0.5+11
+  ln -sf $ANDROID_HOME/jdk-21.0.5+11 $ANDROID_HOME/jdk
   export PATH="$ANDROID_HOME/jdk/bin:$PATH"
   export JAVA_HOME="$ANDROID_HOME/jdk"
   info 'installed jdk'
